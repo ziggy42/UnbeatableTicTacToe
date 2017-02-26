@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest && avas"
   },
   "dependencies": {
     "react": "~15.4.0",
@@ -20,5 +20,12 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-register",
+      "babel-polyfill"
+    ]
   }
 }
