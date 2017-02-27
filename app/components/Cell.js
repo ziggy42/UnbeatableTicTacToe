@@ -35,7 +35,8 @@ export default class Cell extends Component {
         if (!selectedBy)
             return null;
 
-        return selectedBy === MiniMax.HUMAN ? require('../../resources/images/ic_clear_black_24dp.png')
+        return selectedBy === MiniMax.HUMAN
+            ? require('../../resources/images/ic_clear_black_24dp.png')
             : require('../../resources/images/ic_panorama_fish_eye_black_24dp.png');
     }
 
