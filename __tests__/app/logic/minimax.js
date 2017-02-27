@@ -1,5 +1,5 @@
 import test from 'ava';
-import Minimax from '../../../app/logic/minimax'
+import Minimax from '../../../app/logic/minimax';
 
 const minimax = new Minimax();
 
@@ -13,7 +13,7 @@ test('Empty board has no winner', t => {
     failsForBoth(t, [[{}, {}], [{}, {}]]);
 });
 
-test('Non winning boards', t => {
+test('Non winning board', t => {
     let board = [[{ selectedBy: Minimax.HUMAN }, {}], [{}, {}]];
     failsForBoth(t, board);
 
@@ -29,12 +29,19 @@ test('Non winning boards', t => {
 });
 
 test('Diagonal winning board', t => {
-    const board = [
+    let board = [
         [{ selectedBy: Minimax.HUMAN }, { selectedBy: Minimax.AI }, {}],
         [{ selectedBy: Minimax.AI }, { selectedBy: Minimax.HUMAN }, {}],
         [{}, { selectedBy: Minimax.AI }, { selectedBy: Minimax.HUMAN }]
     ];
 
+    t.true(minimax.winning(board, Minimax.HUMAN));
+
+    board = [
+        [{ selectedBy: Minimax.AI }, {}, { selectedBy: Minimax.HUMAN }],
+        [{}, { selectedBy: Minimax.HUMAN }, { selectedBy: Minimax.AI }],
+        [{ selectedBy: Minimax.HUMAN }, {}, {}]
+    ];
     t.true(minimax.winning(board, Minimax.HUMAN));
 });
 
@@ -100,14 +107,14 @@ test('Actual game 1', t => {
 
 test('Actual game 2', t => {
     const board = [
-        [{ selectedBy: Minimax.HUMAN }, { selectedBy: Minimax.AI }, { selectedBy: Minimax.HUMAN }],
-        [{}, { selectedBy: Minimax.AI }, {}],
-        [{}, {}, {}]
+        [{ selectedBy: Minimax.HUMAN }, {}, { selectedBy: Minimax.AI }],
+        [{ selectedBy: Minimax.AI }, {}, { selectedBy: Minimax.AI }],
+        [{}, { selectedBy: Minimax.HUMAN }, { selectedBy: Minimax.HUMAN }]
     ];
 
     t.deepEqual({
         x: 1,
-        y: 2
+        y: 1
     }, minimax.minimax(board, Minimax.AI).position);
 });
 
@@ -118,8 +125,5 @@ test('Actual game 3', t => {
         [{ selectedBy: Minimax.HUMAN }, {}, {}]
     ];
 
-    t.deepEqual({
-        x: 2,
-        y: 0
-    }, minimax.minimax(board, Minimax.AI).position);
+    t.deepEqual({ x: 2, y: 0 }, minimax.minimax(board, Minimax.AI).position);
 });

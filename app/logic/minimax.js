@@ -20,8 +20,8 @@ export default class MiniMax {
 
             const move = {
                 position,
-                score: this.minimax(newBoard, player === MiniMax.AI ?
-                    MiniMax.HUMAN : MiniMax.AI).score
+                score: this.minimax(newBoard, player === MiniMax.AI
+                    ? MiniMax.HUMAN : MiniMax.AI).score
             };
 
             newBoard[position.y][position.x].selectedBy = null;
@@ -71,6 +71,8 @@ export default class MiniMax {
 
     winning(board, player) {
         let winningDiagonal = true;
+        let winningOtherDiagonal = true;
+
         for (let i = 0; i < board.length; i++) {
             let winningColumn = true;
             let winningRow = true;
@@ -90,8 +92,11 @@ export default class MiniMax {
 
             if (board[i][i].selectedBy !== player)
                 winningDiagonal = false;
+
+            if (board[i][board.length - i - 1].selectedBy !== player)
+                winningOtherDiagonal = false;
         }
 
-        return winningDiagonal;
+        return winningDiagonal || winningOtherDiagonal;
     }
 }
