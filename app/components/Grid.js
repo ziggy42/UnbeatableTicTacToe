@@ -63,7 +63,6 @@ export default class Grid extends Component {
         const { gridMatrix } = this.state;
         const { position } = minimax.minimax(gridMatrix, MiniMax.AI);
 
-
         if (position) {
             gridMatrix[position.y][position.x].selectedBy = MiniMax.AI;
             if (minimax.winning(gridMatrix, MiniMax.AI)) {
