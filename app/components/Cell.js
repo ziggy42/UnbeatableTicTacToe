@@ -4,14 +4,10 @@ import MiniMax from '../logic/minimax';
 
 export default class Cell extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = { selected: false };
-    }
-
     onPress = () => {
-        const { onPress, position } = this.props
-        onPress(position)
+        const { onPress, position, selectedBy } = this.props
+        if (!selectedBy)
+            onPress(position)
     }
 
     render() {
