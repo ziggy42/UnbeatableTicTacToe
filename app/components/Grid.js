@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import Cell from './Cell';
 import MiniMax from '../logic/minimax';
 
@@ -63,9 +63,30 @@ export default class Grid extends Component {
         const { gridMatrix } = this.state;
         const { position } = minimax.minimax(gridMatrix, MiniMax.AI);
 
+
         if (position) {
             gridMatrix[position.y][position.x].selectedBy = MiniMax.AI;
-            this.setState({ gridMatrix });
-        } else this.restart();
+            if (minimax.winning(gridMatrix, MiniMax.AI)) {
+                this.showAlert('You lost the game 😟');
+            } else {
+                this.setState({ gridMatrix });
+            }
+        } else {
+            this.showAlert('There are no more moves 🤗');
+        }
+    }
+
+    showAlert(message) {
+        Alert.alert(
+            'Uh-oh',
+            message,
+            [
+                {
+                    text: 'OK',
+                    onPress: () => this.restart()
+                },
+            ],
+            { cancelable: false }
+        );
     }
 }
