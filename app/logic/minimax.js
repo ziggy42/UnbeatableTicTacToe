@@ -1,7 +1,7 @@
 export default class MiniMax {
 
-    static HUMAN = 'human'
-    static AI = 'ai'
+    static HUMAN = 'human';
+    static AI = 'ai';
 
     minimax(newBoard, player) {
         const availablePositions = this.emptyPositions(newBoard);
