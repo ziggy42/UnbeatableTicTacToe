@@ -5,9 +5,9 @@ import MiniMax from '../logic/minimax';
 export default class Cell extends Component {
 
     onPress = () => {
-        const { onPress, position, selectedBy } = this.props
+        const { onPress, position, selectedBy } = this.props;
         if (!selectedBy)
-            onPress(position)
+            onPress(position);
     }
 
     render() {
